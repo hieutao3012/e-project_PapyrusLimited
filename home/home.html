@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papyrus Limited</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+    <div class="header">
+        <!-- Background Slideshow -->
+        <div class="slideshow">
+            <div class="slide active"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <div style="width: 250px;" class="logo">Papyrus Limi<span class="underline">ted.</span></div>
+            <div class="nav-links">
+                <a class="home-button" href="#"><i class="fa-solid fa-house"></i> HOME</a>
+                
+                <div class="dropdown">
+                    <a class="shop-button" href="#">SHOP <i class="dropdown-icon"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Birthday</a></li>
+                        <li><a href="#">Friendship</a></li>
+                        <li><a href="#">Anniversary</a></li>
+                        <li><a href="#">New Year</a></li>
+                    </ul>
+                </div>
+                <a class="best-seller-button" href="#">BEST SELLER</a>
+                <a class="about-us-button" href="#">ABOUT US</a>
+                <a class="contact-button" href="#">CONTACT</a>
+                <a class="register-button" href="#">REGISTER</a>
+            </div>
+            <div style="width: 250px; display: flex; justify-content: flex-end;" class="nav-icons">
+                <i class="icon search"></i>
+                <i class="icon cart"></i>
+                <i class="icon user"></i>
+            </div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero">
+            <h1>Every Touch Has Its Own Feelings</h1>
+            <p>Welcome This Season with 50% OFF</p>
+            <div class="cta-buttons">
+                <button class="btn primary">Shop Now</button>
+                <button class="btn secondary">Play Intro ▶</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const images = [
+                'url("./image/background-slideshow/img1.jpg")',
+                'url("./image/background-slideshow/img2.jpg")',
+                'url("./image/background-slideshow/img3.jpg")',
+                'url("./image/background-slideshow/img4.jpg")'
+            ];
+            
+            // Set initial background images
+            slides.forEach((slide, index) => {
+                slide.style.backgroundImage = images[index];
+            });
+
+            let currentSlide = 0;
+
+            function nextSlide() {
+                // Remove active class from current slide
+                slides[currentSlide].classList.remove('active');
+                
+                // Move to next slide
+                currentSlide = (currentSlide + 1) % slides.length;
+                
+                // Add active class to new slide
+                slides[currentSlide].classList.add('active');
+            }
+
+            // Change slide every 5 seconds
+            setInterval(nextSlide, 5000);
+        });
+    </script>
+</body>
+</html>
