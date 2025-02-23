@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papyrus Limited</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="./footer-script.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .header {
+            height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Slideshow Styles */
+        .slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60vh;
+            background-image: url(../image/background-slideshow/kari-shea-VfWkdMue5Jc-unsplash.jpg);
+            background-size: cover; /* Ảnh phủ toàn bộ thẻ */
+            background-position: center; /* Căn giữa ảnh */
+            background-repeat: no-repeat; /* Không lặp lại ảnh */
+        }
+
+        /* Navigation Styles */
+        .nav-bar {
+            position: relative;
+            z-index: 2;
+            padding: 2rem 40px 168px 40px ;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 2rem;
+            font-weight: 500;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .underline {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-family: Heebo, sans-serif;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links > a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            transform: scale(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links > a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-links > a:hover::after {
+            transform: scale(1);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            filter: invert(1);
+        }
+
+        .search {
+            background-image: url('../image/header-icon/search.svg');
+        }
+
+        .cart {
+            background-image: url('../image/header-icon/cart.svg');
+        }
+
+        .user {
+            background-image: url('../image/header-icon/person.svg');
+        }
+
+        .dropdown-icon {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            filter: invert(1);
+            background-image: url('../image/header-icon/dropdown.png');
+            margin-left: 3px;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content li {
+            list-style: none;
+        }
+
+        .dropdown-content li a {
+            color: black;
+            padding: 10px 15px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-content li a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Display dropdown when hover*/
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        /* Hero Content Styles */
+        .hero {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            color: white;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 600;
+            max-width: 800px;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn.primary {
+            background-color: #8A9A5B;
+            color: white;
+            border: none;
+        }
+
+        .btn.primary:hover {
+            background-color: #7a8a4b;
+        }
+
+        .btn.secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn.secondary:hover {
+            background-color: white;
+            color: black;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* Footer Container */
+        .footer-section{
+            background-color: rgb(241, 235, 236);
+            padding: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 40px 20px 20px 20px;
+        }
+
+        /* Instagram Section */
+        .instagram-section {
+            text-align: center;
+            padding: 20px 0;
+            background-color: rgb(241, 235, 236);
+        }
+
+        .instagram-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 400;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            margin-bottom: 40px;
+        }
+
+        /* Instagram Item and Overlay */
+        .instagram-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .instagram-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay-content {
+            color: white;
+            text-align: center;
+        }
+
+        .overlay-content i {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .overlay-content span {
+            display: block;
+            font-size: 14px;
+        }
+
+        .instagram-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .instagram-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer Content Grid */
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Footer Sections */
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Contact Info */
+        .contact-info p {
+            margin: 10px 0;
+            color: #666;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: #a4b5a6;
+        }
+
+        /* Footer Links */
+        .footer-links a {
+            display: block;
+            color: #666;
+            text-decoration: none;
+            margin: 10px 0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #333;
+            padding-left: 5px;
+        }
+
+        /* Newsletter Section */
+        .newsletter p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .newsletter-form button {
+            padding: 10px 20px;
+            background-color: #a4b5a6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #8fa891;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #333;
+        }
+
+        /* Copyright Section */
+        .copyright_payment-methods{
+            display: flex;
+            padding-top: 16px;
+            border-top: 0.8px solid rgb(156, 175, 159);
+        }
+
+        .copyright {
+            flex: 1;
+            color: rgb(33, 33, 33);
+            font-size: 13px;
+            font-weight: 300;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 20px;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            /* opacity: 0.7;
+            transition: opacity 0.3s ease; */
+        }
+        /* 
+        .payment-methods img:hover {
+            opacity: 1;
+        } */
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .instagram-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        .about-us-content{
+            padding: 3rem 0;
+        }
+
+        .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 10px;
+    padding-top: 50px;
+}
+
+.left {
+    width: 40%;
+    /* Chiếm 50% chiều rộng */
+    display: inline-block;
+    margin-left: 20%;
+}
+
+.right {
+    background-color: #7F6559;
+    width: 40%;
+    /* Chiếm 50% chiều rộng */
+    display: inline-block;
+    margin-right: 20%;
+
+}
+
+.left img {
+    width: 500px;
+    /* Đảm bảo ảnh chiếm toàn bộ chiều rộng của phần bên trái */
+    height: auto;
+
+}
+
+
+
+div.gallery {
+    border: 1px solid black;
+    
+  }
+  
+  
+  div.gallery img {
+    width: 50%;
+    height: auto;
+  }
+  
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .responsive {
+    padding: 0 6px;
+    width: 24.99999%;
+    display: inline-block;
+  }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <!-- Background Slideshow -->
+        <div class="slideshow">
+            <div class="slide active"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <div style="width: 250px;" class="logo">Papyrus Limi<span class="underline">ted.</span></div>
+            <div class="nav-links">
+                <a class="home-button" href="../home.html"><i class="fa-solid fa-house"></i> HOME</a>
+                
+                <div class="dropdown">
+                    <a class="shop-button" href="./shop.html">SHOP <i class="dropdown-icon"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="./shop.html">Birthday</a></li>
+                        <li><a href="./shop.html">Friendship</a></li>
+                        <li><a href="./shop.html">Anniversary</a></li>
+                        <li><a href="./shop.html">New Year</a></li>
+                    </ul>
+                </div>
+                <a class="best-seller-button" href="./best-seller.html">BEST SELLER</a>
+                <a class="about-us-button" href="./about-us.html">ABOUT US</a>
+                <a class="contact-button" href="./contact.html">CONTACT</a>
+                <a class="register-button" href="./register.html">REGISTER</a>
+            </div>
+            <div style="width: 250px; display: flex; justify-content: flex-end;" class="nav-icons">
+                <i class="icon search"></i>
+                <i class="icon cart"></i>
+                <i class="icon user"></i>
+            </div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero">
+            <h1>About Us</h1>
+            <!-- <p>Welcome This Season with 50% OFF</p> -->
+        </div>
+    </div>
+
+    <div class="about-us-content">
+        <!-- about us------------------------------------ -->
+    <div class="container">
+        <div class="left">
+            <img src="../image/img1.jpg" alt="Image">
+        </div>
+        <div class="right">
+            <h1>Who Are You</h1>
+            <p>Papyrus Limited is market leader in the social expression industry. It has grown from a cards-only
+                company to a complete social expressions company. This Company has grown with the spread of modern
+                culture, increasing urbanization and improving standard of living. Adorability and sentiment drive its
+                brand appeal to all age groups and demographics. Papyrus had become a recognized brand and a household
+                name.</p>
+        </div>
+    </div>
+
+
+
+    <div class="responsive">
+        <div class="gallery">
+            <a>
+                <img src="../data/images/birthdaygiftbox.jpg" alt="" width="300" height="200">
+            </a>
+            <div class="desc">Add a description of the image here</div>
+        </div>
+    </div>
+
+
+    <div class="responsive">
+        <div class="gallery">
+            <a>
+                <img src="../image/avatar-trang-70.jpg" alt="" width="300" height="100">
+            </a>
+            <div class="desc">Add a description of the image here</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <a>
+                <img src="../data/images/cookies.jpg" alt="" width="300" height="200">
+            </a>
+            <div class="desc">Add a description of the image here</div>
+        </div>
+    </div>
+
+    <!-- --------------------------------------------------------- -->
+    </div>
+
+    <section class="instagram-section">
+        <h2 class="instagram-title">Follow me on Instagram @fpt_aptech</h2>
+        <div class="instagram-grid">
+            <div class="instagram-item">
+                <img src="../image/footer-image/4edplvquru4.jpg" alt="Ceramic cups">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <i class="fab fa-instagram"></i>
+                        <span>View on Instagram</span>
+                    </div>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="../image/footer-image/ceramic-mugs-on-shelf.jpg" alt="Modern faucet">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <i class="fab fa-instagram"></i>
+                        <span>View on Instagram</span>
+                    </div>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="../image/footer-image/creative-flat-lay-design-of-stylish-beige-architect-moodboard-composition.jpg" alt="Pottery">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <i class="fab fa-instagram"></i>
+                        <span>View on Instagram</span>
+                    </div>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="../image/footer-image/empty-ceramic-bowls.jpg" alt="Pink ceramics">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <i class="fab fa-instagram"></i>
+                        <span>View on Instagram</span>
+                    </div>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="../image/footer-image/empty-ceramic-dishes.jpg" alt="Yellow bowls">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <i class="fab fa-instagram"></i>
+                        <span>View on Instagram</span>
+                    </div>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="../image/footer-image/modern-bathroom-interior-with-white-ceramic-sink.jpg" alt="Ceramic tools">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <i class="fab fa-instagram"></i>
+                        <span>View on Instagram</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="footer-section">
+        <footer class="footer-container">    
+            <div class="footer-content">
+                <div class="footer-section contact-info">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 62 Đường 36, Khu đô Thị Vạn Phúc, Thủ Đức</p>
+                    <p>Hồ Chí Minh - Việt Nam</p>
+                    <p><i class="fas fa-phone"></i> +84 981 578 920</p>
+                    <p><i class="fas fa-envelope"></i> aptech.fpt@fe.edu.vn</p>
+                </div>
+    
+                <div class="footer-section footer-links">
+                    <h3>Customer Service</h3>
+                    <a href="#">My Account</a>
+                    <a href="#">Order History</a>
+                    <a href="#">Newsletter</a>
+                    <a href="#">Brands</a>
+                    <a href="#">Gift Voucher</a>
+                </div>
+    
+                <div class="footer-section footer-links">
+                    <h3>About Us</h3>
+                    <a href="#">About Us</a>
+                    <a href="#">Delivery Information</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Condition</a>
+                    <a href="#">Contact Us</a>
+                </div>
+    
+                <div class="footer-section newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Signup our newsletter to get update information, news & insight</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" id="newsletter-email">
+                        <button id="newsletter-submit">Sign Up</button>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="copyright_payment-methods">
+                <div class="copyright">
+                    Copyright © 2025 Papyrus Limited, All rights reserved. Present by us
+                    
+                </div>  
+                <div class="payment-methods">
+                    <img src="../image/payment-icon/Visa.png" alt="Visa">
+                    <img src="../image/payment-icon/MasterCard.png" alt="Mastercard">
+                    <img src="../image/payment-icon/American-Express.png" alt="American-Express">
+                    <img src="../image/payment-icon/JCB.png" alt="JCB">
+                    <img src="../image/payment-icon/Paypal.png" alt="PayPal">
+                </div>
+            </div>
+        </footer>
+    </section>
+
+</body>
+</html>
