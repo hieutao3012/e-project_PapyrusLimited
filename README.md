@@ -11,6 +11,6 @@
 <br>=======================================
 <br>Documentations : https://github.com/hieutao3012/e-project_PapyrusLimited/tree/main/Document
 <br>=======================================
-<br>Published website : 
+<br>Published website : https://hieutao3012.github.io/e-project_PapyrusLimited/home.html
 <br>=======================================
 <br>Thank you for visit our website.
