@@ -3,7 +3,7 @@
 <br>+ Supervisor		: LÊ THANH NHÂN
 <br>+ Semester		: I	
 <br>+ Batch No		: T5.2410.E0	
-<br>+ Group No:		: 04
+<br>+ Group No		: 04
 <br>+ List Of Member:
 	<br>1. Hoàng Ngọc Hiếu	(Student1614881)
 	<br>2. Nguyễn Triệu Phong	(Student1614873)
